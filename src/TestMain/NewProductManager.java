@@ -3,15 +3,17 @@ package TestMain;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 public class NewProductManager {
-    private Scanner sc = new Scanner(System.in);
+
+    public Scanner sc = new Scanner(System.in);
     public ArrayList<NewProduct> newProductList = new ArrayList<>();
+
 
     public NewProductManager() {
     }
+
 
     public void writerFileData(ArrayList<NewProduct> list) {
         try {
@@ -22,6 +24,7 @@ public class NewProductManager {
             System.err.println(e.getMessage());
         }
     }
+
 
     public ArrayList<NewProduct> readFileData() {
         ArrayList<NewProduct> list = null;
@@ -37,9 +40,11 @@ public class NewProductManager {
         return list;
     }
 
+
     public ArrayList<NewProduct> display() {
         return readFileData();
     }
+
 
     public void addList(int id, String name, String brand, int price) {
         ArrayList<NewProduct> list;
@@ -50,6 +55,7 @@ public class NewProductManager {
         list.add(new NewProduct(id, name, brand, price));
         writerFileData(list);
     }
+
 
     public void deleteNewProduct() {
         System.out.println("Nhập ID: ");
@@ -81,6 +87,7 @@ public class NewProductManager {
         return false;
     }
 
+
     public void editName(int id, String name) {
         ArrayList<NewProduct> list = readFileData();
         for (NewProduct newProduct : list) {
@@ -90,6 +97,7 @@ public class NewProductManager {
         }
         writerFileData(list);
     }
+
 
     public void editBrand(int id, String brand) {
         ArrayList<NewProduct> list = readFileData();
@@ -101,6 +109,7 @@ public class NewProductManager {
         writerFileData(list);
     }
 
+
     public void editPrice(int id, int price) {
         ArrayList<NewProduct> list = readFileData();
         for (NewProduct newProduct : list) {
@@ -110,6 +119,7 @@ public class NewProductManager {
         }
         writerFileData(list);
     }
+
 
     public boolean check() {
         if (readFileData() == null) {

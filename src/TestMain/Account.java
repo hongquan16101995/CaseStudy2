@@ -1,22 +1,44 @@
 package TestMain;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Account {
-    public static List<String> account() {
-        List<String> account = new ArrayList<>();
-        account.add("admin1");
-        account.add("admin2");
-        account.add("admin3");
-        return account;
+
+    private ArrayList<String> accountAdminList;
+    private ArrayList<String> passwordAdminList;
+    private ArrayList<String> accountUserList;
+    private ArrayList<String> passwordUserList;
+
+    public Account(){
+        accountAdminList.add("Admin1");
+        accountAdminList.add("Admin2");
+        accountAdminList.add("Admin3");
+        passwordAdminList.add("123456");
+        passwordAdminList.add("123456");
+        passwordAdminList.add("123456");
     }
 
-    public static List<String> password() {
-        List<String> password = new ArrayList<>();
-        password.add("admin1");
-        password.add("admin2");
-        password.add("admin3");
-        return password;
+    public ArrayList<String> getAccountAdminList() {
+        return accountAdminList;
+    }
+
+    public ArrayList<String> getPasswordAdminList() {
+        return passwordAdminList;
+    }
+
+    public ArrayList<String> getAccountUserList() {
+        return accountUserList;
+    }
+
+    public void setAccountUserList(String accountUser) {
+        this.accountUserList.add(accountUser);
+    }
+
+    public ArrayList<String> getPasswordUserList() {
+        return passwordUserList;
+    }
+
+    public void setPasswordUserList(String passwordUser) {
+        this.passwordUserList.add(passwordUser);
     }
 }

@@ -1,12 +1,12 @@
 package TestMain;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class RunManager extends NewProductManager {
-    private Scanner sc = new Scanner(System.in);
-    public void Login(NewProductManager newProductManager) {
+
+
+    public void Login() {
         System.out.println("1. Đăng nhập");
         System.out.println("2. Đăng ký");
         System.out.println("Nhập vào lựa chọn: ");
@@ -19,35 +19,53 @@ public class RunManager extends NewProductManager {
                 String account = sc.nextLine();
                 System.out.println("Nhập password: ");
                 String passwword = sc.nextLine();
-                if (check(account, passwword)) {
+                if (check(account, passwword) == 1) {
                     System.out.println("Đăng nhập thành công!");
-                    Menu(newProductManager);
+                    menuProduct();
+                } else if (check(account, passwword) == -1) {
+                    System.out.println("Đăng nhập thành công!");
+                    menuProduct();
                 } else
                     System.out.println("Đăng nhập thất bại!");
                 break;
             case 2:
+                sc.nextLine();
+                System.out.println("Mời bạn nhập thông tin: ");
+                System.out.println("Họ tên: ");
+                String name = sc.nextLine();
+                System.out.println("Tuổi: ");
+                int age = sc.nextInt();
         }
     }
 
-    public boolean check(String account, String pass) {
-        List<String> accountList = Account.account();
-        List<String> passwordList = Account.password();
-        for (int i = 0; i < accountList.size(); i++) {
-            if (account.equals(accountList.get(i)) && pass.equals(passwordList.get(i))) {
-                return true;
+
+    public int check(String account, String pass) {
+        Account accountObj = new Account();
+        ArrayList<String> accountAdminList = accountObj.getAccountAdminList();
+        ArrayList<String> passwordAdminList = accountObj.getPasswordAdminList();
+        ArrayList<String> accountUserList = accountObj.getAccountUserList();
+        ArrayList<String> passwordUserList = accountObj.getPasswordUserList();
+        for (int i = 0; i < accountAdminList.size(); i++) {
+            if (account.equals(accountAdminList.get(i)) && pass.equals(passwordAdminList.get(i))) {
+                return 1;
             }
         }
-        return false;
+        for (int i = 0; i < accountUserList.size(); i++) {
+            if (account.equals(accountUserList.get(i)) && pass.equals(passwordUserList.get(i))) {
+                return -1;
+            }
+        }
+        return 0;
     }
 
-    public void Menu(NewProductManager newProductManager) {
+
+    public void menuProduct() {
         boolean count = true;
         do {
             System.out.println("1. Thêm");
             System.out.println("2. Xóa");
             System.out.println("3. Sửa");
             System.out.println("4. Hiển thị");
-            Scanner sc = new Scanner(System.in);
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
@@ -61,44 +79,44 @@ public class RunManager extends NewProductManager {
                     String brand = sc.nextLine();
                     System.out.println("Nhập giá: ");
                     int price = sc.nextInt();
-                    newProductManager.addList(id, name, brand, price);
+                    super.addList(id, name, brand, price);
                     System.out.println("Thêm thành công!");
                     break;
                 case 2:
-                    if (newProductManager.check()) {
+                    if (super.check()) {
                         System.out.println("Hiện không có sản phẩm");
                         break;
                     } else {
-                        newProductManager.deleteNewProduct();
+                        super.deleteNewProduct();
                         System.out.println("Xóa thành công!");
                         break;
                     }
                 case 3:
-                    if (newProductManager.check()) {
+                    if (super.check()) {
                         System.out.println("Hiện không có sản phẩm");
                         break;
-                    } else{
+                    } else {
                         boolean check = true;
                         do {
                             System.out.println("Nhập ID: ");
                             int idedit = sc.nextInt();
-                            if(newProductManager.newEditProduct(idedit)) {
-                                edit(idedit, newProductManager);
+                            if (super.newEditProduct(idedit)) {
+                                editProduct(idedit);
                                 check = false;
-                            }else{
+                            } else {
                                 System.out.println("Nhập sai ID, mời nhập lại!");
                             }
-                        }while (check);
+                        } while (check);
                     }
                     break;
                 case 4:
-                    if (newProductManager.check()) {
+                    if (super.check()) {
                         System.out.println("Hiện không có sản phẩm");
                         break;
                     } else {
-                        ArrayList<NewProduct> list = newProductManager.display();
-                        for (NewProduct newP : list) {
-                            System.out.println(newP);
+                        ArrayList<NewProduct> list = super.display();
+                        for (NewProduct newProduct : list) {
+                            System.out.println(newProduct);
                         }
                     }
                     break;
@@ -106,7 +124,8 @@ public class RunManager extends NewProductManager {
         } while (count);
     }
 
-    public void edit(int id, NewProductManager newProductManager) {
+
+    public void editProduct(int id) {
         System.out.println("1. Sửa tên");
         System.out.println("2. Sửa hãng");
         System.out.println("3. Sửa giá");
@@ -115,24 +134,24 @@ public class RunManager extends NewProductManager {
         switch (choice) {
             case 1:
                 sc.nextLine();
-                System.out.println("Nhập tên mơi: ");
+                System.out.println("Nhập tên mới của sản phẩm: ");
                 String name = sc.nextLine();
-                newProductManager.editName(id, name);
-                System.out.println("Sửa thành công!");
+                super.editName(id, name);
+                System.out.println("Sửa tên sản phẩm có id: " + id + " thành công!");
                 break;
             case 2:
                 sc.nextLine();
-                System.out.println("Nhập hãng mơi: ");
+                System.out.println("Nhập hãng mới của sản phẩm: ");
                 String brand = sc.nextLine();
-                newProductManager.editBrand(id, brand);
-                System.out.println("Sửa thành công!");
+                super.editBrand(id, brand);
+                System.out.println("Sửa hãng sản phẩm có id: " + id + " thành công!");
                 break;
             case 3:
                 sc.nextLine();
-                System.out.println("Nhập giá mơi: ");
+                System.out.println("Nhập giá mới của sản phẩm: ");
                 int price = sc.nextInt();
-                newProductManager.editPrice(id, price);
-                System.out.println("Sửa thành công!");
+                super.editPrice(id, price);
+                System.out.println("Sửa giá sản phẩm có id: " + id + " thành công!");
                 break;
         }
     }
