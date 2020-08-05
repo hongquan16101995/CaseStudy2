@@ -77,7 +77,7 @@ public class NewProductManager {
     }
 
 
-    public boolean newEditProduct(int id) {
+    public boolean checkToEditProduct(int id) {
         ArrayList<NewProduct> list = readFileData();
         for (NewProduct newProduct : list) {
             if (newProduct.getID() == id) {
