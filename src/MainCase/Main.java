@@ -2,6 +2,7 @@ package MainCase;
 
 import _Data._OIDataByTGDD.ListProducts;
 import _Product.Laptop;
+import _Product.Product;
 import _Product.SmartPhone;
 import _Product.Tablet;
 
@@ -13,6 +14,9 @@ public class Main {
         ArrayList<Laptop> listLaptop = listProducts.getListLaptop();
         ArrayList<SmartPhone> listSmartPhone = listProducts.getListSmartphone();
         ArrayList<Tablet> listTablet = listProducts.getListTablet();
-
+        ArrayList<Product> list = new ArrayList<>();
+        list.addAll(listLaptop);
+        list.addAll(listSmartPhone);
+        list.addAll(listTablet);
     }
 }

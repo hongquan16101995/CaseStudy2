@@ -1,5 +1,10 @@
 package TestMain;
 
+import _Data._OIDataByTGDD.ListProducts;
+import _Product.Laptop;
+import _Product.Product;
+import _Product.SmartPhone;
+import _Product.Tablet;
 import _ReadWriteFile.IOFile;
 
 import java.util.ArrayList;
@@ -9,38 +14,50 @@ import java.util.Scanner;
 public class NewProductManager {
 
     public Scanner scanner = new Scanner(System.in);
-    public ArrayList<NewProduct> newProductList = new ArrayList<>();
-    IOFile<NewProduct> ioFile;
+    public ArrayList<Product> newProductList = new ArrayList<>();
+    IOFile<Product> ioFile;
+    ListProducts listProducts;
 
 
     public NewProductManager() {
         ioFile = new IOFile<>();
+        creatListProduct();
+    }
+
+    public void creatListProduct() {
+        listProducts = new ListProducts();
+        ArrayList<Laptop> listLaptop = listProducts.getListLaptop();
+        ArrayList<SmartPhone> listSmartPhone = listProducts.getListSmartphone();
+        ArrayList<Tablet> listTablet = listProducts.getListTablet();
+        newProductList.addAll(listLaptop);
+        newProductList.addAll(listSmartPhone);
+        newProductList.addAll(listTablet);
     }
 
 
-    public void writerFileData(ArrayList<NewProduct> arrayData) {
+    public void writerFileData(ArrayList<Product> arrayData) {
         ioFile.writerFileData(arrayData, "product");
     }
 
 
-    public ArrayList<NewProduct> readFileData() {
+    public ArrayList<Product> readFileData() {
         return ioFile.readFileData("product");
     }
 
 
-    public ArrayList<NewProduct> display() {
+    public ArrayList<Product> display() {
         return readFileData();
     }
 
 
     public void addList(int id, String name, String brand, int price) {
-        ArrayList<NewProduct> list;
-        if (readFileData() != null) {
-            list = readFileData();
-        } else
-            list = newProductList;
-        list.add(new NewProduct(id, name, brand, price));
-        writerFileData(list);
+            ArrayList<Product> list;
+            if (readFileData() != null) {
+                list = readFileData();
+            } else
+                list = newProductList;
+            list.add(new Product(id, name, brand, price));
+            writerFileData(list);
     }
 
 
@@ -48,13 +65,13 @@ public class NewProductManager {
         System.out.println("Nhập ID: (Nhập 0 nếu không muốn xóa)");
         int id = scanner.nextInt();
         boolean check = true;
-        ArrayList<NewProduct> list = readFileData();
-        for (NewProduct newProduct1 : list) {
+        ArrayList<Product> list = readFileData();
+        for (Product product : list) {
             if (id == 0) {
-                RunManager runManager1 = new RunManager();
-                runManager1.menuProductOfAdmin();
+                RunByAdmin runByAdmin1 = new RunByAdmin();
+                runByAdmin1.menuProductOfAdmin();
             } else {
-                if (newProduct1.getId() == id) {
+                if (product.getId() == id) {
                     list.removeIf(allProduct -> allProduct.getId() == id);
                     writerFileData(list);
                     check = false;
@@ -70,9 +87,9 @@ public class NewProductManager {
 
 
     public boolean checkToEditProduct(int id) {
-        ArrayList<NewProduct> list = readFileData();
-        for (NewProduct newProduct : list) {
-            if (newProduct.getId() == id) {
+        ArrayList<Product> list = readFileData();
+        for (Product product : list) {
+            if (product.getId() == id) {
                 return true;
             }
         }
@@ -81,10 +98,10 @@ public class NewProductManager {
 
 
     public void editName(int id, String name) {
-        ArrayList<NewProduct> list = readFileData();
-        for (NewProduct newProduct : list) {
-            if (newProduct.getId() == id) {
-                newProduct.setName(name);
+        ArrayList<Product> list = readFileData();
+        for (Product product : list) {
+            if (product.getId() == id) {
+                product.setName(name);
             }
         }
         writerFileData(list);
@@ -92,10 +109,10 @@ public class NewProductManager {
 
 
     public void editBrand(int id, String brand) {
-        ArrayList<NewProduct> list = readFileData();
-        for (NewProduct newProduct : list) {
-            if (newProduct.getId() == id) {
-                newProduct.setBrand(brand);
+        ArrayList<Product> list = readFileData();
+        for (Product product : list) {
+            if (product.getId() == id) {
+                product.setBrand(brand);
             }
         }
         writerFileData(list);
@@ -103,10 +120,10 @@ public class NewProductManager {
 
 
     public void editPrice(int id, int price) {
-        ArrayList<NewProduct> list = readFileData();
-        for (NewProduct newProduct : list) {
-            if (newProduct.getId() == id) {
-                newProduct.setPrice(price);
+        ArrayList<Product> list = readFileData();
+        for (Product product : list) {
+            if (product.getId() == id) {
+                product.setPrice(price);
             }
         }
         writerFileData(list);
@@ -117,8 +134,8 @@ public class NewProductManager {
         if (readFileData() == null) {
             return true;
         }
-        ArrayList<NewProduct> list = readFileData();
-        Iterator<NewProduct> iterator = list.iterator();
+        ArrayList<Product> list = readFileData();
+        Iterator<Product> iterator = list.iterator();
         if (iterator.hasNext()) {
             return false;
         }

@@ -8,7 +8,7 @@ import _ReadWriteFile.IOFile;
 
 import java.util.ArrayList;
 
-public class ListProducts<dataLaptop> {
+public class ListProducts {
     private IOFile<Laptop> ioLaptop;
     private IOFile<SmartPhone> ioSmartphone;
     private IOFile<Tablet> ioTablet;
@@ -19,6 +19,7 @@ public class ListProducts<dataLaptop> {
         ioSmartphone = new IOFile<>();
         ioTablet = new IOFile<>();
         createListOfDataProduct = new CreateListOfDataProduct();
+        ArrayList<Laptop> dataLaptop = createListOfDataProduct.createDataLaptop();
     }
 
     public void setListLaptop() {

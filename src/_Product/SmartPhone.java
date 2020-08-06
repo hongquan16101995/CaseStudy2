@@ -2,7 +2,7 @@ package _Product;
 
 import java.io.Serializable;
 
-public class SmartPhone implements _Product, Serializable {
+public class SmartPhone extends Product implements _Product, Serializable {
     private int id;
     private String name;
     private String brand;

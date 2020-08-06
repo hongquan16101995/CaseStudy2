@@ -1,5 +1,6 @@
-package TestMain;
+package _Login;
 
+import TestMain.RunByAdmin;
 import _User.AccountAdmin;
 import _User.AccountUser;
 import _User.AccountUserManger;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Login {
     Scanner scanner = new Scanner(System.in);
-    RunManager runManager = new RunManager();
+    RunByAdmin runByAdmin = new RunByAdmin();
     public void loginSystem() {
         System.out.println("1. Đăng nhập");
         System.out.println("2. Đăng ký");
@@ -50,7 +51,7 @@ public class Login {
             boolean checkAccountAdmin = account.equals(accountAdmins.get(i).getAdminAcc()) && passwword.equals(accountAdmins.get(i).getAdminPass());
             if (checkAccountAdmin) {
                 System.out.println("Đăng nhập hệ thống bởi ADMIN thành công!");
-                runManager.menuProductOfAdmin();
+                runByAdmin.menuProductOfAdmin();
             } else if (accountUserManger.checkFile()) {
                 System.out.println("Tài khoản USER chưa tồn tại! Vui lòng kiểm tra lại!");
                 loginSystem();
@@ -58,7 +59,7 @@ public class Login {
                 boolean checkAccountUser = account.equals(accountUsers.get(i).getAccount()) && passwword.equals(accountUsers.get(i).getPassword());
                 if (checkAccountUser) {
                     System.out.println("Đăng nhập hệ thống bởi USER thành công!");
-                    runManager.menuProductOfAdmin();
+                    runByAdmin.menuProductOfAdmin();
                 }
             } else {
                 System.out.println("Đăng nhập thất bại! Vui lòng kiểm tra lại!");

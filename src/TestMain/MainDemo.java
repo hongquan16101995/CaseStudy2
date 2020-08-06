@@ -1,13 +1,14 @@
 package TestMain;
 
-import _User.User;
-import _User.UserManager;
-import java.util.ArrayList;
+import _Login.Login;
 
 public class MainDemo {
     public static void main(String[] args) {
-       Login login = new Login();
-       login.loginSystem();
-
+        Login login = new Login();
+        RunByUser runByUser = new RunByUser();
+        RunByAdmin runByAdmin = new RunByAdmin();
+//        login.loginSystem();
+//        runByUser.menuProductOfUser();
+        runByAdmin.menuProductOfAdmin();
     }
 }

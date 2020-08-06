@@ -1,9 +1,17 @@
 package TestMain;
 
+import _Product.Product;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RunManager extends NewProductManager {
+public class RunByAdmin {
+    private Scanner scanner = new Scanner(System.in);
+    private NewProductManager newProductManager;
+
+    public RunByAdmin(){
+        newProductManager = new NewProductManager();
+    }
 
     public void menuProductOfAdmin() {
         boolean count = true;
@@ -21,16 +29,16 @@ public class RunManager extends NewProductManager {
                     addByRunmanager();
                     break;
                 case 2:
-                    if (super.checkFile()) {
+                    if (newProductManager.checkFile()) {
                         System.out.println("Hiện không có sản phẩm");
                         break;
                     } else {
-                        super.deleteNewProduct();
+                        newProductManager.deleteNewProduct();
                         System.out.println("Xóa thành công!");
                         break;
                     }
                 case 3:
-                    if (super.checkFile()) {
+                    if (newProductManager.checkFile()) {
                         System.out.println("Hiện không có sản phẩm");
                         break;
                     } else {
@@ -38,7 +46,7 @@ public class RunManager extends NewProductManager {
                         do {
                             System.out.println("Nhập ID: ");
                             int idedit = scanner.nextInt();
-                            if (super.checkToEditProduct(idedit)) {
+                            if (newProductManager.checkToEditProduct(idedit)) {
                                 editProduct(idedit);
                                 check = false;
                             } else {
@@ -48,13 +56,13 @@ public class RunManager extends NewProductManager {
                     }
                     break;
                 case 4:
-                    if (super.checkFile()) {
+                    if (newProductManager.checkFile()) {
                         System.out.println("Hiện không có sản phẩm");
                         break;
                     } else {
-                        ArrayList<NewProduct> list = super.display();
-                        for (NewProduct newProduct : list) {
-                            System.out.println(newProduct);
+                        ArrayList<Product> list = newProductManager.display();
+                        for (Product product : list) {
+                            product.display();
                         }
                     }
                     break;
@@ -76,7 +84,7 @@ public class RunManager extends NewProductManager {
         String brand = scanner.nextLine();
         System.out.println("Nhập giá: ");
         int price = scanner.nextInt();
-        super.addList(id, name, brand, price);
+        newProductManager.addList(id, name, brand, price);
         System.out.println("Thêm thành công!");
     }
 
@@ -107,7 +115,7 @@ public class RunManager extends NewProductManager {
         scanner.nextLine();
         System.out.println("Nhập giá mới của sản phẩm: ");
         int price = scanner.nextInt();
-        super.editPrice(id, price);
+        newProductManager.editPrice(id, price);
         System.out.println("Sửa giá sản phẩm có id: " + id + " thành công!");
     }
 
@@ -115,7 +123,7 @@ public class RunManager extends NewProductManager {
         scanner.nextLine();
         System.out.println("Nhập hãng mới của sản phẩm: ");
         String brand = scanner.nextLine();
-        super.editBrand(id, brand);
+        newProductManager.editBrand(id, brand);
         System.out.println("Sửa hãng sản phẩm có id: " + id + " thành công!");
     }
 
@@ -123,7 +131,7 @@ public class RunManager extends NewProductManager {
         scanner.nextLine();
         System.out.println("Nhập tên mới của sản phẩm: ");
         String name = scanner.nextLine();
-        super.editName(id, name);
+        newProductManager.editName(id, name);
         System.out.println("Sửa tên sản phẩm có id: " + id + " thành công!");
     }
 }
