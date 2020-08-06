@@ -14,21 +14,17 @@ public class CreateListOfDataProduct {
 
     public ArrayList<Laptop> createDataLaptop() {
         ArrayList<Laptop> laptopArrayList = new ArrayList<>();
-        ArrayList<String> id = createOfDataProduct.getIdLaptop();
-        ArrayList<String> name = createOfDataProduct.getNameLaptop();
-        ArrayList<String> brand = createOfDataProduct.getBrandLaptop();
-        ArrayList<String> price = createOfDataProduct.getPriceLaptop();
+        ArrayList<String> idlist = createOfDataProduct.getIdLaptop();
+        ArrayList<String> namelist = createOfDataProduct.getNameLaptop();
+        ArrayList<String> brandlist = createOfDataProduct.getBrandLaptop();
+        ArrayList<String> pricelist = createOfDataProduct.getPriceLaptop();
 
-        for (int i = 0; i < name.size(); i++) {
-            Laptop laptop = new Laptop();
-            String id1 = id.get(i);
-            laptop.setId(Integer.parseInt(id1));
-            String name1 = name.get(i);
-            laptop.setName(name1);
-            String brand1 = brand.get(i);
-            laptop.setBrand(brand1);
-            String price1 = price.get(i);
-            laptop.setPrice(Integer.parseInt(price1));
+        for (int i = 0; i < namelist.size(); i++) {
+            int id = Integer.parseInt(idlist.get(i));
+            String name = namelist.get(i);
+            String brand = brandlist.get(i);
+            int price = Integer.parseInt(pricelist.get(i));
+            Laptop laptop = new Laptop(id, name, brand, price);
             laptopArrayList.add(laptop);
         }
         return laptopArrayList;
@@ -36,21 +32,17 @@ public class CreateListOfDataProduct {
 
     public ArrayList<SmartPhone> createDataSmartphone() {
         ArrayList<SmartPhone> smartPhoneArrayList = new ArrayList<>();
-        ArrayList<String> id = createOfDataProduct.getIdSmartphone();
-        ArrayList<String> name = createOfDataProduct.getNameSmartphone();
-        ArrayList<String> brand = createOfDataProduct.getBrandSmartphone();
-        ArrayList<String> price = createOfDataProduct.getPriceSmartphone();
+        ArrayList<String> idlist = createOfDataProduct.getIdSmartphone();
+        ArrayList<String> namelist = createOfDataProduct.getNameSmartphone();
+        ArrayList<String> brandlist = createOfDataProduct.getBrandSmartphone();
+        ArrayList<String> pricelist = createOfDataProduct.getPriceSmartphone();
 
-        for (int i = 0; i < name.size(); i++) {
-            SmartPhone smartPhone = new SmartPhone();
-            String id1 = id.get(i);
-            smartPhone.setId(Integer.parseInt(id1));
-            String name1 = name.get(i);
-            smartPhone.setName(name1);
-            String brand1 = brand.get(i);
-            smartPhone.setBrand(brand1);
-            String price1 = price.get(i);
-            smartPhone.setPrice(Integer.parseInt(price1));
+        for (int i = 0; i < namelist.size(); i++) {
+            int id = Integer.parseInt(idlist.get(i));
+            String name = namelist.get(i);
+            String brand = brandlist.get(i);
+            int price = Integer.parseInt(pricelist.get(i));
+            SmartPhone smartPhone = new SmartPhone(id, name, brand, price);
             smartPhoneArrayList.add(smartPhone);
         }
         return smartPhoneArrayList;
@@ -58,21 +50,17 @@ public class CreateListOfDataProduct {
 
     public ArrayList<Tablet> createDataTablet() {
         ArrayList<Tablet> tabletArrayList = new ArrayList<>();
-        ArrayList<String> id = createOfDataProduct.getIdTablet();
-        ArrayList<String> name = createOfDataProduct.getNameTablet();
-        ArrayList<String> brand = createOfDataProduct.getBrandTablet();
-        ArrayList<String> price = createOfDataProduct.getPriceTablet();
+        ArrayList<String> idlist = createOfDataProduct.getIdTablet();
+        ArrayList<String> namelist = createOfDataProduct.getNameTablet();
+        ArrayList<String> brandlist = createOfDataProduct.getBrandTablet();
+        ArrayList<String> pricelist = createOfDataProduct.getPriceTablet();
 
-        for (int i = 0; i < name.size(); i++) {
-            Tablet tablet = new Tablet();
-            String id1 = id.get(i);
-            tablet.setId(Integer.parseInt(id1));
-            String name1 = name.get(i);
-            tablet.setName(name1);
-            String brand1 = brand.get(i);
-            tablet.setBrand(brand1);
-            String price1 = price.get(i);
-            tablet.setPrice(Integer.parseInt(price1));
+        for (int i = 0; i < namelist.size(); i++) {
+            int id = Integer.parseInt(idlist.get(i));
+            String name = namelist.get(i);
+            String brand = brandlist.get(i);
+            int price = Integer.parseInt(pricelist.get(i));
+            Tablet tablet = new Tablet(id, name, brand, price);
             tabletArrayList.add(tablet);
         }
         return tabletArrayList;

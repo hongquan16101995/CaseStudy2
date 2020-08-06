@@ -1,11 +1,59 @@
 package Product;
 
-public class SmartPhone extends Product{
+import java.io.Serializable;
+
+public class SmartPhone implements Product, Serializable {
+    private int id;
+    private String name;
+    private String brand;
+    private int price;
+
     public SmartPhone(int id, String name, String brand, int price) {
-        super(id, name, brand, price);
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
     }
 
-    public SmartPhone(){}
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getBrand() {
+        return this.brand;
+    }
+
+    @Override
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    @Override
+    public int getPrice() {
+        return this.price;
+    }
+
+    @Override
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public void display(){
         System.out.print("Smartphone:  ");

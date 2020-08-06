@@ -19,12 +19,12 @@ public class NewProductManager {
 
 
     public void writerFileData(ArrayList<NewProduct> arrayData) {
-        ioFile.writerFileData(arrayData,"test.txt");
+        ioFile.writerFileData(arrayData,"FileData/test.txt");
     }
 
 
     public ArrayList<NewProduct> readFileData() {
-        return ioFile.readFileData("test.txt");
+        return ioFile.readFileData("FileData/test.txt");
     }
 
 
