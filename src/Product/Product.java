@@ -48,8 +48,10 @@ public class Product {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", brand='" + brand + '\'' + ", price=" + price + "}";
+    public void display(){
+        System.out.printf("%-4s%-10d", "id:", id);
+        System.out.printf("%-6s%-60s", "name:", name);
+        System.out.printf("%-7s%-10s", "brand:", brand);
+        System.out.printf("%-7s%-10d", "price:", price);
     }
 }

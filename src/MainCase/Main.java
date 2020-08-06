@@ -25,13 +25,13 @@ public class Main {
 
 
         for (Laptop laptop : arrayListLap){
-            System.out.println(laptop);
+            laptop.display();
         }
         for (SmartPhone smartPhone : arrayListPhone){
-            System.out.println(smartPhone);
+            smartPhone.display();
         }
         for (Tablet tablet : arrayListTab){
-            System.out.println(tablet);
+            tablet.display();
         }
     }
 }
