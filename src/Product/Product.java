@@ -1,18 +1,27 @@
 package Product;
 
 public class Product {
+    private int id;
     private String name;
     private String brand;
     private int price;
 
     public Product(){
-
     }
 
-    public Product(String name, String brand, int price) {
+    public Product(int id, String name, String brand, int price) {
+        this.id = id;
         this.name = name;
         this.brand = brand;
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -41,6 +50,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "name='" + name + '\'' + ", brand='" + brand + '\'' + ", price=" + price + "}";
+        return "Product{" + "id=" + id + ", name='" + name + '\'' + ", brand='" + brand + '\'' + ", price=" + price + "}";
     }
 }

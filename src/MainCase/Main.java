@@ -23,32 +23,15 @@ public class Main {
 //        arrayProduct.addAll(arrayListPhone);
 //        arrayProduct.addAll(arrayListTab);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("laptop"));
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(arrayListLap);
-        objectOutputStream.close();
-
-        FileInputStream fileInputStream = new FileInputStream("laptop");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        List<Laptop> arrayLaptop = (List<Laptop>) objectInputStream.readObject();
-        objectInputStream.close();
-
-        for (Laptop laptop : arrayLaptop){
-            System.out.println(laptop);
-        }
 
         for (Laptop laptop : arrayListLap){
             System.out.println(laptop);
         }
-//        for (SmartPhone smartPhone : arrayListPhone){
-//            System.out.println(smartPhone);
-//        }
-//        for (Tablet tablet : arrayListTab){
-//            System.out.println(tablet);
-//        }
-
-        for (Product product : arrayProduct){
-            System.out.println(product);
+        for (SmartPhone smartPhone : arrayListPhone){
+            System.out.println(smartPhone);
+        }
+        for (Tablet tablet : arrayListTab){
+            System.out.println(tablet);
         }
     }
 }

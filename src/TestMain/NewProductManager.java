@@ -1,6 +1,7 @@
 package TestMain;
 
-import java.io.*;
+import ReadWriteFile.IOFile;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -9,35 +10,21 @@ public class NewProductManager {
 
     public Scanner sc = new Scanner(System.in);
     public ArrayList<NewProduct> newProductList = new ArrayList<>();
+    IOFile<NewProduct> ioFile;
 
 
     public NewProductManager() {
+        ioFile = new IOFile<>();
     }
 
 
-    public void writerFileData(ArrayList<NewProduct> list) {
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("test.txt")));
-            objectOutputStream.writeObject(list);
-            objectOutputStream.close();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
+    public void writerFileData(ArrayList<NewProduct> arrayData) {
+        ioFile.writerFileData(arrayData,"test.txt");
     }
 
 
     public ArrayList<NewProduct> readFileData() {
-        ArrayList<NewProduct> list = null;
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("test.txt"));
-            if (objectInputStream.readObject() == null) {
-                return null;
-            }
-            list = (ArrayList<NewProduct>) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("");
-        }
-        return list;
+        return ioFile.readFileData("test.txt");
     }
 
 
