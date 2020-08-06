@@ -1,9 +1,9 @@
 package MainCase;
 
-import Data._OIDataByTGDD.ListProducts;
-import Product.Laptop;
-import Product.SmartPhone;
-import Product.Tablet;
+import _Data._OIDataByTGDD.ListProducts;
+import _Product.Laptop;
+import _Product.SmartPhone;
+import _Product.Tablet;
 
 import java.util.ArrayList;
 
@@ -13,5 +13,6 @@ public class Main {
         ArrayList<Laptop> listLaptop = listProducts.getListLaptop();
         ArrayList<SmartPhone> listSmartPhone = listProducts.getListSmartphone();
         ArrayList<Tablet> listTablet = listProducts.getListTablet();
+
     }
 }

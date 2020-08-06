@@ -1,11 +1,13 @@
 package TestMain;
 
-import ReadWriteFile.IOFile;
+import _User.User;
+import _User.UserManager;
 import java.util.ArrayList;
 
 public class MainDemo {
     public static void main(String[] args) {
-//        RunManager runManager = new RunManager();
-//        runManager.menuProduct();
+       Login login = new Login();
+       login.loginSystem();
+
     }
 }

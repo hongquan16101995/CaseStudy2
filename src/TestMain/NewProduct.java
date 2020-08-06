@@ -3,24 +3,24 @@ package TestMain;
 import java.io.Serializable;
 
 public class NewProduct implements Serializable {
-    private int ID;
+    private int id;
     private String name;
     private String brand;
     private int price;
 
     public NewProduct(int id, String name, String brand, int price) {
-        this.ID = id;
+        this.id = id;
         this.name = name;
         this.brand = brand;
         this.price = price;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,6 +49,11 @@ public class NewProduct implements Serializable {
 
     @Override
     public String toString() {
-        return "NewProduct{" + "ID=" + ID + ", name='" + name + '\'' + ", brand='" + brand + '\'' + ", price=" + price + "}";
+        return "NewProduct{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
