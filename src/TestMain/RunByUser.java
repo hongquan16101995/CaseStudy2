@@ -7,9 +7,7 @@ import _Product.SmartPhone;
 import _Product.Tablet;
 import _ProductManager.ProductManager;
 
-
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RunByUser {
@@ -20,6 +18,7 @@ public class RunByUser {
     private ArrayList<SmartPhone> smartPhonesList;
     private ArrayList<Tablet> tabletsList;
     private ArrayList<Product> productsList;
+
 
     public RunByUser() {
         laptopsList = listProducts.getListLaptop();
@@ -53,17 +52,17 @@ public class RunByUser {
                         System.out.println("2. Thoát");
                         System.out.println("Nhập vào lựa chọn của bạn: ");
                         int choiceBuy = scanner.nextInt();
-                        switch (choiceBuy){
+                        switch (choiceBuy) {
                             case 1:
                                 int price = buyProduct();
-                                sumprice +=price;
+                                sumprice += price;
                                 break;
                             case 2:
                                 System.out.println("Tổng số tiền cần thanh toán là: " + sumprice);
                                 menuProductOfUser();
                                 break;
                         }
-                    }while (checkBuy);
+                    } while (checkBuy);
                 case 0:
                     System.out.println("Đã thoát khỏi hệ thống");
                     System.exit(0);
@@ -120,13 +119,13 @@ public class RunByUser {
         System.out.println("Nhập vào id sản phẩm: ");
         int id = scanner.nextInt();
         for (Product product : productsList) {
-            if(product.getId() == id){
+            if (product.getId() == id) {
                 price = product.getPrice();
             }
         }
-        if(deleteNewProduct(id)){
+        if (deleteNewProduct(id)) {
             System.out.println("Mua hàng thành công, số tiền cần thanh toán là: " + price);
-        }else
+        } else
             System.out.println("Mua hàng thất bại, sản phẩm không tồn tại!");
         return price;
     }
