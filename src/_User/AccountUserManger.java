@@ -33,11 +33,6 @@ public class AccountUserManger {
         if (getAccountUserList() == null) {
             return true;
         }
-        ArrayList<AccountUser> list = getAccountUserList();
-        Iterator<AccountUser> iterator = list.iterator();
-        if (iterator.hasNext()) {
-            return false;
-        }
-        return true;
+        return false;
     }
 }

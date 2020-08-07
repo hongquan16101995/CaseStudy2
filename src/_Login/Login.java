@@ -1,10 +1,8 @@
 package _Login;
 
 import TestMain.RunByAdmin;
-import _User.AccountAdmin;
-import _User.AccountUser;
-import _User.AccountUserManger;
-import _User.UserManager;
+import TestMain.RunByUser;
+import _User.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -13,6 +11,7 @@ import java.util.Scanner;
 public class Login {
     Scanner scanner = new Scanner(System.in);
     RunByAdmin runByAdmin = new RunByAdmin();
+    RunByUser runByUser = new RunByUser();
 
     public void loginSystem() {
         try {
@@ -71,11 +70,11 @@ public class Login {
                     boolean checkAccountUser = account.equals(accountUsers.get(i).getAccount()) && passwword.equals(accountUsers.get(i).getPassword());
                     if (checkAccountUser) {
                         System.out.println("Đăng nhập hệ thống bởi USER thành công!");
-                        runByAdmin.menuProductOfAdmin();
+                        runByUser.menuProductOfUser();
                     }
                 }
             }
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
             loginSystem();
         }
@@ -101,24 +100,30 @@ public class Login {
 
     private void checkAndWriteUser(String name, long phonenumber, String address, String accountUser, String passwordUser) {
         UserManager userManager = new UserManager();
-        AccountUserManger accountUserManger1 = new AccountUserManger();
-        ArrayList<AccountUser> accountUserList = accountUserManger1.getAccountUserList();
-        if (accountUserManger1.checkFile() || userManager.checkFile()) {
-            accountUserManger1.setListUser(accountUser, passwordUser);
+        AccountUserManger accountUserManager = new AccountUserManger();
+        ArrayList<AccountUser> accountUserList = accountUserManager.getAccountUserList();
+        if(accountUserManager.checkFile()){
+            accountUserManager.setListUser(accountUser, passwordUser);
             userManager.setListUser(name, phonenumber, address);
+            System.out.println("Đăng ký thành công! Mời đăng nhập hệ thống!");
+            loginSystem();
+        }else if ((new AccountUserManger().getAccountUserList().size() == 0)) {
+            accountUserManager.setListUser(accountUser, passwordUser);
+            userManager.setListUser(name, phonenumber, address);
+            System.out.println("Đăng ký thành công! Mời đăng nhập hệ thống!");
         } else {
             for (int i = 0; i < accountUserList.size(); i++) {
                 boolean checkAccountUser = accountUser.equals(accountUserList.get(i).getAccount());
                 if (checkAccountUser) {
                     System.out.println("Tài khoản đã tồn tại! Vui lòng đăng ký lại!");
-                    loginSystem();
+                    break;
                 } else {
-                    accountUserManger1.setListUser(accountUser, passwordUser);
+                    accountUserManager.setListUser(accountUser, passwordUser);
                     userManager.setListUser(name, phonenumber, address);
+                    System.out.println("Đăng ký thành công! Mời đăng nhập hệ thống!");
                 }
             }
         }
-        System.out.println("Đăng ký thành công! Mời đăng nhập hệ thống!");
         loginSystem();
     }
 }

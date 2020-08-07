@@ -79,6 +79,8 @@ public class RunByAdmin {
                     case 5:
                         if ((new AccountUserManger()).checkFile()) {
                             System.out.println("Hiện không có người dùng nào!");
+                        }else if((new AccountUserManger()).getAccountUserList().size() == 0) {
+                            System.out.println("Hiện không có người dùng nào!");
                         } else {
                             boolean check = true;
                             do {
@@ -92,11 +94,7 @@ public class RunByAdmin {
                                         displayUser();
                                         break;
                                     case 2:
-                                        scanner.nextLine();
-                                        System.out.println("Nhập vào accountuser: ");
-                                        String acc = scanner.nextLine();
-                                        deleteUser(acc);
-                                        System.out.println("Xóa người dùng thành công!");
+                                        deleteUserByCheck();
                                         break;
                                     case 0:
                                         menuProductOfAdmin();
@@ -106,8 +104,8 @@ public class RunByAdmin {
                         }
                         break;
                     case 0:
-                        System.out.println("Đã thoát khỏi hệ thống ADMIN");
                         (new Login()).loginSystem();
+                        System.out.println("Đã thoát khỏi hệ thống ADMIN");
                         System.out.println();
                 }
             } while (count);
@@ -161,17 +159,38 @@ public class RunByAdmin {
         }
     }
 
-    private void deleteUser(String acc) {
+    private void deleteUserByCheck() {
+        if ((new AccountUserManger()).getAccountUserList().size() == 0) {
+            System.out.println("Hiện không có người dùng nào");
+        } else {
+            scanner.nextLine();
+            System.out.println("Nhập vào accountuser: ");
+            String acc = scanner.nextLine();
+            if(deleteUser(acc)){
+                System.out.println("Xóa người dùng thành công!");
+            }else {
+                System.out.println("Không tồn tại người dùng có account là: " + acc);
+            }
+        }
+    }
+
+
+    private boolean deleteUser(String acc) {
         ArrayList<AccountUser> accountUserList = getAccountUser();
         ArrayList<User> userList = getUser();
+        boolean checkDel = false;
         for (int i = 0; i < accountUserList.size(); i++) {
             if (accountUserList.get(i).getAccount().equals(acc)) {
                 accountUserList.remove(accountUserList.get(i));
                 userList.remove(userList.get(i));
+                checkDel = true;
+            }else{
+                checkDel = false;
             }
         }
         (new IOFile<AccountUser>()).writerFileData(accountUserList, "FileData/accountuser");
         (new IOFile<User>()).writerFileData(userList, "FileData/userinfo");
+        return checkDel;
     }
 
     private void addByRunmanager(int choiceAdd) throws InputMismatchException {

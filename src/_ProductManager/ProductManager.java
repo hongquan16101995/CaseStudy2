@@ -130,7 +130,7 @@ public class ProductManager {
         }
     }
 
-    private void deleteLap(int id) {
+    public void deleteLap(int id) {
         ArrayList<Laptop> laptops = listProducts.getListLaptop();
         for (int i = 0; i < laptops.size(); i++) {
             if (laptops.get(i).getId() == id) {
@@ -140,7 +140,7 @@ public class ProductManager {
         }
     }
 
-    private void deleteSmartPhone(int id) {
+    public void deleteSmartPhone(int id) {
         ArrayList<SmartPhone> smartPhones = listProducts.getListSmartphone();
         for (int i = 0; i < smartPhones.size(); i++) {
             if (smartPhones.get(i).getId() == id) {
@@ -150,7 +150,7 @@ public class ProductManager {
         }
     }
 
-    private void deleteTablet(int id) {
+    public void deleteTablet(int id) {
         ArrayList<Tablet> tablets = listProducts.getListTablet();
         for (int i = 0; i < tablets.size(); i++) {
             if (tablets.get(i).getId() == id) {

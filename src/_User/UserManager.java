@@ -33,11 +33,6 @@ public class UserManager {
         if (getUserList() == null) {
             return true;
         }
-        ArrayList<User> list = getUserList();
-        Iterator<User> iterator = list.iterator();
-        if (iterator.hasNext()) {
-            return false;
-        }
-        return true;
+        return false;
     }
 }
