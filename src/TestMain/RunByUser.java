@@ -1,8 +1,8 @@
 package TestMain;
 
-import java.util.ArrayList;
+import _ProductManager.ProductManager;
 
-public class RunByUser extends NewProductManager {
+public class RunByUser extends ProductManager {
     public void menuProductOfUser() {
         boolean count = true;
         do {

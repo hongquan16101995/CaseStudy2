@@ -1,5 +1,6 @@
-package TestMain;
+package _ProductManager;
 
+import TestMain.RunByAdmin;
 import _Data._OIDataByTGDD.ListProducts;
 import _Product.Laptop;
 import _Product.Product;
@@ -12,7 +13,7 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class NewProductManager {
+public class ProductManager {
 
     public Scanner scanner = new Scanner(System.in);
     public ArrayList<Product> newProductList = new ArrayList<>();
@@ -20,7 +21,7 @@ public class NewProductManager {
     ListProducts listProducts;
 
 
-    public NewProductManager() {
+    public ProductManager() {
         ioFile = new IOFile<>();
         createListProduct();
     }
