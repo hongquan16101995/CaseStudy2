@@ -7,6 +7,7 @@ public class Product implements Serializable {
     private String name;
     private String brand;
     private int price;
+    private String title;
 
     public Product() {
     }
@@ -50,8 +51,16 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public void display(){
-        System.out.print("Product: ");
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void display() {
+        System.out.printf("%-9s", getTitle());
         System.out.printf("%-4s%-4s%-10d", "", "id:", getId());
         System.out.printf("%-6s%-55s", "name:", getName());
         System.out.printf("%-7s%-18s", "brand:", getBrand());

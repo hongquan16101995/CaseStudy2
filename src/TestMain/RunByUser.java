@@ -32,7 +32,7 @@ public class RunByUser extends NewProductManager {
     private void menuProduct() {
         boolean count = true;
         do {
-            System.out.println("----------SẢN PHẨM---------");
+            System.out.println("----------HỆ THỐNG USER---------");
             System.out.println("1. Laptop");
             System.out.println("2. SmartPhone");
             System.out.println("3. Tablet");

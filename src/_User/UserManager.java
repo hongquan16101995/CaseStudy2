@@ -14,7 +14,7 @@ public class UserManager {
         ioFile = new IOFile<>();
     }
 
-    public ArrayList<User> getUserList(){
+    public ArrayList<User> getUserList() {
         return ioFile.readFileData("FileData/userinfo");
     }
 
@@ -27,5 +27,17 @@ public class UserManager {
         }
         users.add(new User(name, phonenumber, address));
         ioFile.writerFileData(users, "FileData/userinfo");
+    }
+
+    public boolean checkFile() {
+        if (getUserList() == null) {
+            return true;
+        }
+        ArrayList<User> list = getUserList();
+        Iterator<User> iterator = list.iterator();
+        if (iterator.hasNext()) {
+            return false;
+        }
+        return true;
     }
 }

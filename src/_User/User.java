@@ -2,7 +2,7 @@ package _User;
 
 import java.io.*;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private String nameUser;
     private long phonenumberUser;
     private String addressUser;

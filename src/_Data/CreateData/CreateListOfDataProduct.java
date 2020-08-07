@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class CreateListOfDataProduct {
     private CreateOfDataProduct createOfDataProduct;
 
-    public CreateListOfDataProduct(){
+    public CreateListOfDataProduct() {
         createOfDataProduct = new CreateOfDataProduct();
         createOfDataProduct.setAll();
     }

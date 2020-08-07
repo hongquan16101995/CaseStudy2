@@ -19,7 +19,6 @@ public class ListProducts {
         ioSmartphone = new IOFile<>();
         ioTablet = new IOFile<>();
         createListOfDataProduct = new CreateListOfDataProduct();
-        ArrayList<Laptop> dataLaptop = createListOfDataProduct.createDataLaptop();
     }
 
     public void setListLaptop() {

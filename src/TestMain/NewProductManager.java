@@ -8,6 +8,7 @@ import _Product.Tablet;
 import _ReadWriteFile.IOFile;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -21,10 +22,10 @@ public class NewProductManager {
 
     public NewProductManager() {
         ioFile = new IOFile<>();
-        creatListProduct();
+        createListProduct();
     }
 
-    public void creatListProduct() {
+    public void createListProduct() {
         listProducts = new ListProducts();
         ArrayList<Laptop> listLaptop = listProducts.getListLaptop();
         ArrayList<SmartPhone> listSmartPhone = listProducts.getListSmartphone();
@@ -36,12 +37,12 @@ public class NewProductManager {
 
 
     public void writerFileData(ArrayList<Product> arrayData) {
-        ioFile.writerFileData(arrayData, "product");
+        ioFile.writerFileData(arrayData, "FileData/product");
     }
 
 
     public ArrayList<Product> readFileData() {
-        return ioFile.readFileData("product");
+        return ioFile.readFileData("FileData/product");
     }
 
 
@@ -50,18 +51,57 @@ public class NewProductManager {
     }
 
 
-    public void addList(int id, String name, String brand, int price) {
-            ArrayList<Product> list;
-            if (readFileData() != null) {
-                list = readFileData();
-            } else
-                list = newProductList;
-            list.add(new Product(id, name, brand, price));
+    public void addList(int id, String name, String brand, int price, int choiceAdd) {
+        if (choiceAdd == 1) {
+            addLaptopAndProduct(id, name, brand, price);
+        } else if (choiceAdd == 2) {
+            addSmartphoneAndProduct(id, name, brand, price);
+        } else if (choiceAdd == 3) {
+            addTabletAndProduct(id, name, brand, price);
+        } else {
+            ArrayList<Product> list = readFileData();
+            Product product = new Product(id, name, brand, price);
+            product.setTitle("Product: ");
+            list.add(product);
             writerFileData(list);
+        }
+    }
+
+    private void addTabletAndProduct(int id, String name, String brand, int price) {
+        ArrayList<Product> list = readFileData();
+        ArrayList<Tablet> tablets = listProducts.getListTablet();
+        Product product = new Product(id, name, brand, price);
+        product.setTitle("Tablet: ");
+        list.add(product);
+        tablets.add(new Tablet(id, name, brand, price));
+        writerFileData(list);
+        ((new IOFile<Tablet>())).writerFileData(tablets, "FileData/tablet");
+    }
+
+    private void addSmartphoneAndProduct(int id, String name, String brand, int price) {
+        ArrayList<Product> list = readFileData();
+        ArrayList<SmartPhone> smartPhones = listProducts.getListSmartphone();
+        Product product = new Product(id, name, brand, price);
+        product.setTitle("Smartphone: ");
+        list.add(product);
+        smartPhones.add(new SmartPhone(id, name, brand, price));
+        writerFileData(list);
+        ((new IOFile<SmartPhone>())).writerFileData(smartPhones, "FileData/smartphone");
+    }
+
+    private void addLaptopAndProduct(int id, String name, String brand, int price) {
+        ArrayList<Product> list = readFileData();
+        ArrayList<Laptop> laptops = listProducts.getListLaptop();
+        Product product = new Product(id, name, brand, price);
+        product.setTitle("Laptop: ");
+        list.add(product);
+        laptops.add(new Laptop(id, name, brand, price));
+        writerFileData(list);
+        ((new IOFile<Laptop>())).writerFileData(laptops, "FileData/laptop");
     }
 
 
-    public void deleteNewProduct() {
+    public void deleteNewProduct() throws InputMismatchException {
         System.out.println("Nhập ID: (Nhập 0 nếu không muốn xóa)");
         int id = scanner.nextInt();
         boolean check = true;
@@ -72,16 +112,50 @@ public class NewProductManager {
                 runByAdmin1.menuProductOfAdmin();
             } else {
                 if (product.getId() == id) {
-                    list.removeIf(allProduct -> allProduct.getId() == id);
+                    list.removeIf(Product -> Product.getId() == id);
                     writerFileData(list);
+                    deleteLap(id);
+                    deleteSmartPhone(id);
+                    deleteTablet(id);
                     check = false;
                     break;
                 }
             }
         }
+
         if (check) {
             System.out.println("Nhập sai ID, mời nhập lại!");
             deleteNewProduct();
+        }
+    }
+
+    private void deleteLap(int id) {
+        ArrayList<Laptop> laptops = listProducts.getListLaptop();
+        for (int i = 0; i < laptops.size(); i++) {
+            if (laptops.get(i).getId() == id) {
+                laptops.remove(laptops.get(i));
+                ((new IOFile<Laptop>())).writerFileData(laptops, "FileData/laptop");
+            }
+        }
+    }
+
+    private void deleteSmartPhone(int id) {
+        ArrayList<SmartPhone> smartPhones = listProducts.getListSmartphone();
+        for (int i = 0; i < smartPhones.size(); i++) {
+            if (smartPhones.get(i).getId() == id) {
+                smartPhones.remove(smartPhones.get(i));
+                ((new IOFile<SmartPhone>())).writerFileData(smartPhones, "FileData/smartphone");
+            }
+        }
+    }
+
+    private void deleteTablet(int id) {
+        ArrayList<Tablet> tablets = listProducts.getListTablet();
+        for (int i = 0; i < tablets.size(); i++) {
+            if (tablets.get(i).getId() == id) {
+                tablets.remove(tablets.get(i));
+                ((new IOFile<Tablet>())).writerFileData(tablets, "FileData/tablet");
+            }
         }
     }
 

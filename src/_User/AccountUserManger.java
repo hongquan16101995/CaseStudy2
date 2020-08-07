@@ -14,22 +14,8 @@ public class AccountUserManger {
         ioFile = new IOFile<>();
     }
 
-    public ArrayList<AccountUser> getAccountUserList(){
+    public ArrayList<AccountUser> getAccountUserList() {
         return ioFile.readFileData("FileData/accountuser");
-    }
-
-    public boolean checkAccount(String account) {
-        if (ioFile.readFileData("FileData/accountuser") == null) {
-            return false;
-        } else {
-            ArrayList<AccountUser> accountUsers = getAccountUserList();
-            for (AccountUser accountUser : accountUsers) {
-                if (accountUser.getAccount().equals(account)) {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
     public void setListUser(String account, String password) {

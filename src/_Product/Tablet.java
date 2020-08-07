@@ -8,7 +8,8 @@ public class Tablet extends Product implements _Product, Serializable {
     private String brand;
     private int price;
 
-    public Tablet(){}
+    public Tablet() {
+    }
 
     public Tablet(int id, String name, String brand, int price) {
         this.id = id;
@@ -57,7 +58,7 @@ public class Tablet extends Product implements _Product, Serializable {
         this.price = price;
     }
 
-    public void display(){
+    public void display() {
         System.out.print("Tablet:  ");
         System.out.printf("%-4s%-4s%-10d", "", "id:", getId());
         System.out.printf("%-6s%-55s", "name:", getName());

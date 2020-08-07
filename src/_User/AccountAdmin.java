@@ -31,7 +31,7 @@ public class AccountAdmin implements Serializable {
         accountAdminList.add(new AccountAdmin(adminAcc, adminPass));
     }
 
-    public ArrayList<AccountAdmin> getAdminAccountList(){
+    public ArrayList<AccountAdmin> getAdminAccountList() {
         return accountAdminList;
     }
 
