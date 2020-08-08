@@ -24,6 +24,9 @@ public class RunByAdmin {
         try {
             do {
                 int choice = choiceOfAdmin();
+                if(choice < 0 || choice > 6){
+                    System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
+                }
                 switch (choice) {
                     case 1:
                         menuAddProduct();
@@ -131,6 +134,10 @@ public class RunByAdmin {
                 System.out.println("0. Thoát");
                 System.out.println("Mời bạn nhập vào lựa chọn: ");
                 int choiceAdd = scanner.nextInt();
+                if(choiceAdd < 0 || choiceAdd > 4){
+                    System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
+                    menuAddProduct();
+                }
                 addByProduct(choiceAdd);
             } while (true);
         } catch (InputMismatchException e) {
