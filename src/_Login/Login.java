@@ -1,6 +1,6 @@
 package _Login;
 
-import TestMain.RunByAdmin;
+import _Admin.RunByAdmin;
 import TestMain.RunByUser;
 import _User.*;
 

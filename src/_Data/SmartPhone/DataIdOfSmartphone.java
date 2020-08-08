@@ -5,10 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataIdOfSmartphone {
-    private ArrayList<String> dataIdOfSmartphone;
+    private final ArrayList<String> dataIdOfSmartphone = new ArrayList<>();
 
     public DataIdOfSmartphone() {
-        dataIdOfSmartphone = new ArrayList<>();
     }
 
     public ArrayList<String> createDataId(ArrayList<String> data) {

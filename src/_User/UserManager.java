@@ -3,19 +3,17 @@ package _User;
 import _ReadWriteFile.IOFile;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class UserManager {
-    private ArrayList<User> userList;
-    private IOFile<User> ioFile;
+    private final ArrayList<User> userList = new ArrayList<>();
+    private final IOFile<User> ioFile = new IOFile<>();
+    private final String PATHNAME_OF_USER = "FileData/userinfo";
 
     public UserManager() {
-        userList = new ArrayList<>();
-        ioFile = new IOFile<>();
     }
 
     public ArrayList<User> getUserList() {
-        return ioFile.readFileData("FileData/userinfo");
+        return ioFile.readFileData(PATHNAME_OF_USER);
     }
 
     public void setListUser(String name, long phonenumber, String address) {
@@ -26,13 +24,10 @@ public class UserManager {
             users = userList;
         }
         users.add(new User(name, phonenumber, address));
-        ioFile.writerFileData(users, "FileData/userinfo");
+        ioFile.writerFileData(users, PATHNAME_OF_USER);
     }
 
     public boolean checkFile() {
-        if (getUserList() == null) {
-            return true;
-        }
-        return false;
+        return getUserList() == null;
     }
 }

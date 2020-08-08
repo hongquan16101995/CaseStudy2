@@ -5,10 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataBrandOfSmartphone {
-    private ArrayList<String> dataBrandOfSmartphone;
+    private final ArrayList<String> dataBrandOfSmartphone = new ArrayList<>();
 
     public DataBrandOfSmartphone() {
-        dataBrandOfSmartphone = new ArrayList<>();
     }
 
     public ArrayList<String> createDataBrand(ArrayList<String> data) {

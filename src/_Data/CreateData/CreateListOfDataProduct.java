@@ -1,14 +1,12 @@
 package _Data.CreateData;
 
 import _Product.*;
-
 import java.util.ArrayList;
 
 public class CreateListOfDataProduct {
-    private CreateOfDataProduct createOfDataProduct;
+    private final CreateOfDataProduct createOfDataProduct = new CreateOfDataProduct();
 
     public CreateListOfDataProduct() {
-        createOfDataProduct = new CreateOfDataProduct();
         createOfDataProduct.setAll();
     }
 

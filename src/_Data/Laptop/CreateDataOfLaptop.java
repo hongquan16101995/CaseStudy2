@@ -7,10 +7,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class CreateDataOfLaptop {
-    private ArrayList<String> data;
+    private final ArrayList<String> data = new ArrayList<>();
 
     public CreateDataOfLaptop() {
-        data = new ArrayList<>();
     }
 
     public ArrayList<String> createData() throws IOException {

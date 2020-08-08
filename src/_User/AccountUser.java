@@ -1,6 +1,5 @@
 package _User;
 
-
 import java.io.Serializable;
 
 public class AccountUser implements Serializable {

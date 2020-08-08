@@ -1,6 +1,5 @@
 package _Data.CreateData;
 
-
 import _Data.Laptop.*;
 import _Data.SmartPhone.*;
 import _Data.Tablet.*;
@@ -38,7 +37,6 @@ public class CreateOfDataProduct {
         setPriceSmartphone();
         setPriceTablet();
     }
-
 
     public ArrayList<String> getIdLaptop() {
         return idLaptop;

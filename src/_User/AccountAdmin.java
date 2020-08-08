@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class AccountAdmin implements Serializable {
     private String adminAcc;
     private String adminPass;
-    private ArrayList<AccountAdmin> accountAdminList = new ArrayList<>();
+    private final ArrayList<AccountAdmin> accountAdminList = new ArrayList<>();
 
     public AccountAdmin(String adminAcc, String adminPass) {
         this.adminAcc = adminAcc;

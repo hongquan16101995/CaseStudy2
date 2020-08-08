@@ -1,33 +1,32 @@
 package _ProductManager;
 
-import TestMain.RunByAdmin;
+import _Admin.RunByAdmin;
 import _Data._OIDataByTGDD.ListProducts;
 import _Product.Laptop;
 import _Product.Product;
 import _Product.SmartPhone;
 import _Product.Tablet;
 import _ReadWriteFile.IOFile;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class ProductManager {
-
     public Scanner scanner = new Scanner(System.in);
-    public ArrayList<Product> newProductList = new ArrayList<>();
-    IOFile<Product> ioFile;
-    ListProducts listProducts;
-
+    private final ArrayList<Product> newProductList = new ArrayList<>();
+    private final IOFile<Product> ioFile = new IOFile<>();
+    private final ListProducts listProducts = new ListProducts();
+    private final String PATHNAME_OF_PRODUCT = "FileData/product";
+    private final String PATHNAME_OF_LAPTOP = "FileData/laptop";
+    private final String PATHNAME_OF_SMARTPHONE = "FileData/smartphone";
+    private final String PATHNAME_OF_TABLET = "FileData/tablet";
 
     public ProductManager() {
-        ioFile = new IOFile<>();
         createListProduct();
     }
 
     public void createListProduct() {
-        listProducts = new ListProducts();
         ArrayList<Laptop> listLaptop = listProducts.getListLaptop();
         ArrayList<SmartPhone> listSmartPhone = listProducts.getListSmartphone();
         ArrayList<Tablet> listTablet = listProducts.getListTablet();
@@ -36,14 +35,12 @@ public class ProductManager {
         newProductList.addAll(listTablet);
     }
 
-
     public void writerFileData(ArrayList<Product> arrayData) {
-        ioFile.writerFileData(arrayData, "FileData/product");
+        ioFile.writerFileData(arrayData, PATHNAME_OF_PRODUCT);
     }
 
-
     public ArrayList<Product> readFileData() {
-        return ioFile.readFileData("FileData/product");
+        return ioFile.readFileData(PATHNAME_OF_PRODUCT);
     }
 
 
@@ -68,15 +65,15 @@ public class ProductManager {
         }
     }
 
-    private void addTabletAndProduct(int id, String name, String brand, int price) {
+    private void addLaptopAndProduct(int id, String name, String brand, int price) {
         ArrayList<Product> list = readFileData();
-        ArrayList<Tablet> tablets = listProducts.getListTablet();
+        ArrayList<Laptop> laptops = listProducts.getListLaptop();
         Product product = new Product(id, name, brand, price);
-        product.setTitle("Tablet: ");
+        product.setTitle("Laptop: ");
         list.add(product);
-        tablets.add(new Tablet(id, name, brand, price));
+        laptops.add(new Laptop(id, name, brand, price));
         writerFileData(list);
-        ((new IOFile<Tablet>())).writerFileData(tablets, "FileData/tablet");
+        ((new IOFile<Laptop>())).writerFileData(laptops, PATHNAME_OF_LAPTOP);
     }
 
     private void addSmartphoneAndProduct(int id, String name, String brand, int price) {
@@ -87,18 +84,18 @@ public class ProductManager {
         list.add(product);
         smartPhones.add(new SmartPhone(id, name, brand, price));
         writerFileData(list);
-        ((new IOFile<SmartPhone>())).writerFileData(smartPhones, "FileData/smartphone");
+        ((new IOFile<SmartPhone>())).writerFileData(smartPhones, PATHNAME_OF_SMARTPHONE);
     }
 
-    private void addLaptopAndProduct(int id, String name, String brand, int price) {
+    private void addTabletAndProduct(int id, String name, String brand, int price) {
         ArrayList<Product> list = readFileData();
-        ArrayList<Laptop> laptops = listProducts.getListLaptop();
+        ArrayList<Tablet> tablets = listProducts.getListTablet();
         Product product = new Product(id, name, brand, price);
-        product.setTitle("Laptop: ");
+        product.setTitle("Tablet: ");
         list.add(product);
-        laptops.add(new Laptop(id, name, brand, price));
+        tablets.add(new Tablet(id, name, brand, price));
         writerFileData(list);
-        ((new IOFile<Laptop>())).writerFileData(laptops, "FileData/laptop");
+        ((new IOFile<Tablet>())).writerFileData(tablets, PATHNAME_OF_TABLET);
     }
 
 
@@ -135,7 +132,7 @@ public class ProductManager {
         for (int i = 0; i < laptops.size(); i++) {
             if (laptops.get(i).getId() == id) {
                 laptops.remove(laptops.get(i));
-                ((new IOFile<Laptop>())).writerFileData(laptops, "FileData/laptop");
+                ((new IOFile<Laptop>())).writerFileData(laptops, PATHNAME_OF_LAPTOP);
             }
         }
     }
@@ -145,7 +142,7 @@ public class ProductManager {
         for (int i = 0; i < smartPhones.size(); i++) {
             if (smartPhones.get(i).getId() == id) {
                 smartPhones.remove(smartPhones.get(i));
-                ((new IOFile<SmartPhone>())).writerFileData(smartPhones, "FileData/smartphone");
+                ((new IOFile<SmartPhone>())).writerFileData(smartPhones, PATHNAME_OF_SMARTPHONE);
             }
         }
     }
@@ -155,9 +152,24 @@ public class ProductManager {
         for (int i = 0; i < tablets.size(); i++) {
             if (tablets.get(i).getId() == id) {
                 tablets.remove(tablets.get(i));
-                ((new IOFile<Tablet>())).writerFileData(tablets, "FileData/tablet");
+                ((new IOFile<Tablet>())).writerFileData(tablets, PATHNAME_OF_TABLET);
             }
         }
+    }
+
+    public void deleteAll() {
+        ArrayList<Product> listProduct = readFileData();
+        ArrayList<Laptop> laptops = listProducts.getListLaptop();
+        ArrayList<SmartPhone> smartPhones = listProducts.getListSmartphone();
+        ArrayList<Tablet> tablets = listProducts.getListTablet();
+        listProduct.clear();
+        laptops.clear();
+        smartPhones.clear();
+        tablets.clear();
+        writerFileData(listProduct);
+        ((new IOFile<Laptop>())).writerFileData(laptops, PATHNAME_OF_LAPTOP);
+        ((new IOFile<SmartPhone>())).writerFileData(smartPhones, PATHNAME_OF_SMARTPHONE);
+        ((new IOFile<Tablet>())).writerFileData(tablets, PATHNAME_OF_TABLET);
     }
 
 
@@ -171,7 +183,6 @@ public class ProductManager {
         return false;
     }
 
-
     public void editName(int id, String name) {
         ArrayList<Product> list = readFileData();
         for (Product product : list) {
@@ -182,7 +193,6 @@ public class ProductManager {
         writerFileData(list);
     }
 
-
     public void editBrand(int id, String brand) {
         ArrayList<Product> list = readFileData();
         for (Product product : list) {
@@ -192,7 +202,6 @@ public class ProductManager {
         }
         writerFileData(list);
     }
-
 
     public void editPrice(int id, int price) {
         ArrayList<Product> list = readFileData();
@@ -205,15 +214,20 @@ public class ProductManager {
     }
 
 
+    public void backupProduct() {
+        listProducts.setListTablet();
+        listProducts.setListLaptop();
+        listProducts.setListSmartphone();
+        writerFileData(newProductList);
+    }
+
+
     public boolean checkFile() {
         if (readFileData() == null) {
             return true;
         }
         ArrayList<Product> list = readFileData();
         Iterator<Product> iterator = list.iterator();
-        if (iterator.hasNext()) {
-            return false;
-        }
-        return true;
+        return !iterator.hasNext();
     }
 }

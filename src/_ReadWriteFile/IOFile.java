@@ -21,7 +21,7 @@ public class IOFile<E> {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
             return (ArrayList<E>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("");
+            System.out.println();
         }
         return null;
     }

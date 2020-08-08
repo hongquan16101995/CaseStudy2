@@ -8,6 +8,7 @@ import _Product.Tablet;
 import _ProductManager.ProductManager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class RunByUser {
@@ -144,5 +145,9 @@ public class RunByUser {
         }
         return check;
     }
+
+//    public boolean checkProduct() {
+//
+//    }
 }
 

@@ -5,10 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataPriceOfLaptop {
-    private ArrayList<String> dataPriceOfLaptop;
+    private final ArrayList<String> dataPriceOfLaptop = new ArrayList<>();
 
     public DataPriceOfLaptop() {
-        dataPriceOfLaptop = new ArrayList<>();
     }
 
     public ArrayList<String> createDataPrice(ArrayList<String> data) {
