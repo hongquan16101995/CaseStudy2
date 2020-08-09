@@ -24,7 +24,9 @@ public class Login {
         try {
             menuLogin();
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             loginSystems();
         }
@@ -36,6 +38,7 @@ public class Login {
         System.out.println("1. Đăng nhập");
         System.out.println("2. Đăng ký");
         System.out.println("0. Thoát");
+        System.out.println();
         System.out.println("MỜi nhập vào lựa chọn của bạn");
         int choice = scanner.nextInt();
         switch (choice) {
@@ -65,25 +68,36 @@ public class Login {
     private void checkAccount(String account, String password) {
         try {
             if (checkAccountAdminInLogin(account, password)) {
+                System.out.println();
                 System.out.println("Đăng nhập hệ thống bởi ADMIN thành công!");
+                System.out.println();
                 runByAdmin.menuProductOfAdmin();
             } else {
-                System.out.println("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
-                loginSystems();
-            }
-
-            if (accountUserManager.checkFile()) {
-                System.out.println("Tài khoản USER chưa tồn tại! Vui lòng kiểm tra lại!");
-                loginSystems();
-            } else if (checkAccountUserInLogin(account, password)) {
-                System.out.println("Đăng nhập hệ thống bởi USER thành công!");
-                runByUser.menuProductOfUser();
-            } else {
-                System.out.println("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
-                loginSystems();
+                checkUserThenAdmin(account, password);
             }
         } catch (IndexOutOfBoundsException e) {
+            System.out.println();
             System.out.println("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
+            System.out.println();
+            loginSystems();
+        }
+    }
+
+    private void checkUserThenAdmin(String account, String password) {
+        if (accountUserManager.checkFile()) {
+            System.out.println();
+            System.out.println("Tài khoản USER chưa tồn tại! Vui lòng kiểm tra lại!");
+            System.out.println();
+            loginSystems();
+        } else if (checkAccountUserInLogin(account, password)) {
+            System.out.println();
+            System.out.println("Đăng nhập hệ thống bởi USER thành công!");
+            System.out.println();
+            runByUser.menuProductOfUser();
+        } else {
+            System.out.println();
+            System.out.println("Đăng nhập thất bại! Vui lòng kiểm tra lại!");
+            System.out.println();
             loginSystems();
         }
     }
@@ -131,12 +145,18 @@ public class Login {
     private void checkAccountUser(String name, long phonenumber, String address, String accountUser, String passwordUser) {
         if (accountUserManager.checkFile()) {
             writerAccountUserAndUser(name, phonenumber, address, accountUser, passwordUser);
+            System.out.println();
             System.out.println("Đăng ký thành công! Mời đăng nhập hệ thống!");
+            System.out.println();
         } else if (checkAccount(accountUser)) {
+            System.out.println();
             System.out.println("Tài khoản đã tồn tại! Vui lòng đăng ký lại!");
+            System.out.println();
         } else {
             writerAccountUserAndUser(name, phonenumber, address, accountUser, passwordUser);
+            System.out.println();
             System.out.println("Đăng ký thành công! Mời đăng nhập hệ thống!");
+            System.out.println();
         }
         loginSystems();
     }

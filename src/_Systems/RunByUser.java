@@ -70,7 +70,7 @@ public class RunByUser {
     private void displayProductOfUser() {
         if (productManager.checkFile()) {
             System.out.println();
-            System.out.println("Hiện không có sản phẩm");
+            System.out.println("Hiện không có sản phẩm!");
             System.out.println();
         } else {
             menuProduct();
@@ -80,7 +80,7 @@ public class RunByUser {
     private void searchProductOfUser() {
         if (productManager.checkFile()) {
             System.out.println();
-            System.out.println("Hiện không có sản phẩm");
+            System.out.println("Hiện không có sản phẩm!");
             System.out.println();
         } else {
             menuSearchProduct();
@@ -89,7 +89,7 @@ public class RunByUser {
 
     private void exitOfUser() {
         System.out.println();
-        System.out.println("Đã thoát khỏi hệ thống USER");
+        System.out.println("Đã thoát khỏi hệ thống USER!");
         System.out.println();
         (new Login()).loginSystems();
         System.out.println();
@@ -111,7 +111,7 @@ public class RunByUser {
                 case 1:
                     if (listProducts.checkFile()) {
                         System.out.println();
-                        System.out.println("Hiện không có sản phẩm");
+                        System.out.println("Hiện không có sản phẩm!");
                         System.out.println();
                     } else {
                         for (Laptop laptop : listProducts.getListLaptop()) {
@@ -124,7 +124,7 @@ public class RunByUser {
                 case 2:
                     if (listProducts.checkFile()) {
                         System.out.println();
-                        System.out.println("Hiện không có sản phẩm");
+                        System.out.println("Hiện không có sản phẩm!");
                         System.out.println();
                     } else {
                         for (SmartPhone smartPhone : listProducts.getListSmartphone()) {
@@ -137,7 +137,7 @@ public class RunByUser {
                 case 3:
                     if (listProducts.checkFile()) {
                         System.out.println();
-                        System.out.println("Hiện không có sản phẩm");
+                        System.out.println("Hiện không có sản phẩm!");
                         System.out.println();
                     } else {
                         for (Tablet tablet : listProducts.getListTablet()) {

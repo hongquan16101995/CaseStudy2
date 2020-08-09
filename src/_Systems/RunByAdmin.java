@@ -80,7 +80,7 @@ public class RunByAdmin {
     private void deleteProductOfAdmin() {
         if (productManager.checkFile()) {
             System.out.println();
-            System.out.println("Hiện không có sản phẩm");
+            System.out.println("Hiện không có sản phẩm!");
             System.out.println();
         } else {
             menuDeleteProduct();
@@ -90,7 +90,7 @@ public class RunByAdmin {
     private void editProductOfAdmin() {
         if (productManager.checkFile()) {
             System.out.println();
-            System.out.println("Hiện không có sản phẩm");
+            System.out.println("Hiện không có sản phẩm!");
             System.out.println();
         } else {
             menuEditProduct();
@@ -100,7 +100,7 @@ public class RunByAdmin {
     private void displayProductOfAdmin() {
         if (productManager.checkFile()) {
             System.out.println();
-            System.out.println("Hiện không có sản phẩm");
+            System.out.println("Hiện không có sản phẩm!");
             System.out.println();
         } else {
             menuDisplayProduct();
@@ -130,7 +130,7 @@ public class RunByAdmin {
 
     private void exitOfAdmin() {
         System.out.println();
-        System.out.println("Đã thoát khỏi hệ thống ADMIN");
+        System.out.println("Đã thoát khỏi hệ thống ADMIN!");
         System.out.println();
         (new Login()).loginSystems();
         System.out.println();
@@ -414,7 +414,7 @@ public class RunByAdmin {
         ArrayList<User> userList = getUser();
         if (accountUserList.size() == 0) {
             System.out.println();
-            System.out.println("Hiện không có người dùng nào");
+            System.out.println("Hiện không có người dùng nào!");
             System.out.println();
         } else {
             for (int i = 0; i < accountUserList.size(); i++) {
@@ -428,7 +428,7 @@ public class RunByAdmin {
     private void deleteUserByCheck() {
         if ((new AccountUserManager()).getAccountUserList().size() == 0) {
             System.out.println();
-            System.out.println("Hiện không có người dùng nào");
+            System.out.println("Hiện không có người dùng nào!");
             System.out.println();
         } else {
             scanner.nextLine();
