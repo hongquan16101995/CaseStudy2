@@ -26,8 +26,4 @@ public class UserManager {
         users.add(new User(name, phonenumber, address));
         ioFile.writerFileData(users, PATHNAME_OF_USER);
     }
-
-    public boolean checkFile() {
-        return getUserList() == null;
-    }
 }
