@@ -218,7 +218,11 @@ public class ProductManager {
         listProducts.setListTablet();
         listProducts.setListLaptop();
         listProducts.setListSmartphone();
-        writerFileData(newProductList);
+        ArrayList<Product> listbackup = new ArrayList<>();
+        listbackup.addAll(listProducts.getListLaptop());
+        listbackup.addAll(listProducts.getListSmartphone());
+        listbackup.addAll(listProducts.getListTablet());
+        writerFileData(listbackup);
     }
 
 

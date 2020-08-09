@@ -14,10 +14,9 @@ import java.util.Scanner;
 
 public class RunByAdmin {
     private final Scanner scanner = new Scanner(System.in);
-    private final ProductManager productManager;
+    private final ProductManager productManager = new ProductManager();
 
     public RunByAdmin() {
-        productManager = new ProductManager();
     }
 
     public void menuProductOfAdmin() {
@@ -120,6 +119,7 @@ public class RunByAdmin {
         System.out.println();
     }
     //hết menu
+
 
 
     //chức năng thêm sản phẩm
@@ -229,8 +229,8 @@ public class RunByAdmin {
                 productManager.deleteAll();
                 System.out.println("Đã xóa tất cả sản phẩm!");
             case "N":
-                menuProductOfAdmin();
                 System.out.println("Đã hủy thao tác!");
+                menuProductOfAdmin();
         }
     }
     //hết xóa sản phẩm

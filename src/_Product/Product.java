@@ -3,11 +3,11 @@ package _Product;
 import java.io.Serializable;
 
 public class Product implements Serializable {
+    private String title;
     private int id;
     private String name;
     private String brand;
     private int price;
-    private String title;
 
     public Product() {
     }
