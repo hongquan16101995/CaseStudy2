@@ -1,6 +1,6 @@
 package _ProductManager;
 
-import _Admin.RunByAdmin;
+import _Systems.RunByAdmin;
 import _Data._OIDataByTGDD.ListProducts;
 import _Product.Laptop;
 import _Product.Product;

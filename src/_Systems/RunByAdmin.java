@@ -1,13 +1,14 @@
-package _Admin;
+package _Systems;
 
 import _Login.Login;
 import _Product.Product;
 import _ProductManager.ProductManager;
 import _ReadWriteFile.IOFile;
-import _User.AccountUser;
-import _User.AccountUserManger;
-import _User.User;
-import _User.UserManager;
+import _Account.AccountUser;
+import _Account.AccountUserManager;
+import _Account.User;
+import _Account.UserManager;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -23,7 +24,8 @@ public class RunByAdmin {
         try {
             do {
                 int choice = choiceOfAdmin();
-                if(choice < 0 || choice > 6){
+                if (choice < 0 || choice > 6) {
+                    System.out.println();
                     System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
                 }
                 switch (choice) {
@@ -38,6 +40,7 @@ public class RunByAdmin {
                         break;
                     case 4:
                         displayProductOfAdmin();
+                        System.out.println();
                         break;
                     case 5:
                         displayUserOfAdmin();
@@ -50,12 +53,13 @@ public class RunByAdmin {
                 }
             } while (true);
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             menuProductOfAdmin();
         }
     }
-
 
 
     //menu của hệ thống ADMIN
@@ -75,7 +79,9 @@ public class RunByAdmin {
 
     private void deleteProductOfAdmin() {
         if (productManager.checkFile()) {
+            System.out.println();
             System.out.println("Hiện không có sản phẩm");
+            System.out.println();
         } else {
             menuDeleteProduct();
         }
@@ -83,7 +89,9 @@ public class RunByAdmin {
 
     private void editProductOfAdmin() {
         if (productManager.checkFile()) {
+            System.out.println();
             System.out.println("Hiện không có sản phẩm");
+            System.out.println();
         } else {
             menuEditProduct();
         }
@@ -91,17 +99,23 @@ public class RunByAdmin {
 
     private void displayProductOfAdmin() {
         if (productManager.checkFile()) {
+            System.out.println();
             System.out.println("Hiện không có sản phẩm");
+            System.out.println();
         } else {
             menuDisplayProduct();
         }
     }
 
     private void displayUserOfAdmin() {
-        if ((new AccountUserManger()).checkFile()) {
+        if ((new AccountUserManager()).checkFile()) {
+            System.out.println();
             System.out.println("Hiện không có người dùng nào!");
-        } else if ((new AccountUserManger()).getAccountUserList().size() == 0) {
+            System.out.println();
+        } else if ((new AccountUserManager()).getAccountUserList().size() == 0) {
+            System.out.println();
             System.out.println("Hiện không có người dùng nào!");
+            System.out.println();
         } else {
             menuCheckUser();
         }
@@ -109,17 +123,19 @@ public class RunByAdmin {
 
     private void backupOfAdmin() {
         productManager.backupProduct();
+        System.out.println();
         System.out.println("Khôi phục dữ liệu thành công!");
         System.out.println();
     }
 
     private void exitOfAdmin() {
-        (new Login()).loginSystem();
+        System.out.println();
         System.out.println("Đã thoát khỏi hệ thống ADMIN");
+        System.out.println();
+        (new Login()).loginSystems();
         System.out.println();
     }
     //hết menu
-
 
 
     //chức năng thêm sản phẩm
@@ -134,14 +150,18 @@ public class RunByAdmin {
                 System.out.println("0. Thoát");
                 System.out.println("Mời bạn nhập vào lựa chọn: ");
                 int choiceAdd = scanner.nextInt();
-                if(choiceAdd < 0 || choiceAdd > 4){
+                if (choiceAdd < 0 || choiceAdd > 4) {
+                    System.out.println();
                     System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
+                    System.out.println();
                     menuAddProduct();
                 }
                 addByProduct(choiceAdd);
             } while (true);
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             menuAddProduct();
         }
@@ -179,7 +199,9 @@ public class RunByAdmin {
         System.out.println("Nhập giá: ");
         int price = scanner.nextInt();
         productManager.addList(id, name, brand, price, choiceAdd);
+        System.out.println();
         System.out.println("Thêm thành công!");
+        System.out.println();
     }
     //hết thêm sản phẩm
 
@@ -191,25 +213,38 @@ public class RunByAdmin {
                 System.out.println("1. Xóa theo ID");
                 System.out.println("2. Xóa tất cả sản phẩm");
                 System.out.println("0. Thoát");
+                System.out.println();
                 System.out.println("Mời bạn nhập vào lựa chọn: ");
                 choiceToDeleteProduct();
             } while (true);
-        }catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
         }
     }
 
     private void choiceToDeleteProduct() {
         int delete = scanner.nextInt();
-        if (delete != 1 && delete != 2) {
+        if (delete != 1 && delete != 2 && delete != 0) {
+            System.out.println();
             System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
+            System.out.println();
         }
         switch (delete) {
             case 1:
-                scanner.nextLine();
-                productManager.deleteNewProduct();
-                System.out.println("Xóa thành công!");
+                if (productManager.readFileData().isEmpty()) {
+                    System.out.println();
+                    System.out.println("Hiện không có sản phẩm!");
+                    System.out.println();
+                } else {
+                    scanner.nextLine();
+                    productManager.deleteNewProduct();
+                    System.out.println();
+                    System.out.println("Xóa thành công!");
+                    System.out.println();
+                }
                 break;
             case 2:
                 confirmDelete();
@@ -222,15 +257,22 @@ public class RunByAdmin {
 
     private void confirmDelete() {
         scanner.nextLine();
+        System.out.println();
         System.out.println("Nhập 'Y' để xác nhận xóa hoặc 'N' để hủy thao tác!");
         String del = scanner.nextLine();
         switch (del) {
             case "Y":
                 productManager.deleteAll();
+                System.out.println();
                 System.out.println("Đã xóa tất cả sản phẩm!");
+                System.out.println();
+                break;
             case "N":
+                System.out.println();
                 System.out.println("Đã hủy thao tác!");
+                System.out.println();
                 menuProductOfAdmin();
+                break;
         }
     }
     //hết xóa sản phẩm
@@ -247,7 +289,9 @@ public class RunByAdmin {
                 displayProductEdit(idedit);
                 check = false;
             } else {
+                System.out.println();
                 System.out.println("Nhập sai ID, mời nhập lại!");
+                System.out.println();
             }
         } while (check);
     }
@@ -274,7 +318,9 @@ public class RunByAdmin {
                     break;
             }
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             editProduct(id);
         }
@@ -285,7 +331,9 @@ public class RunByAdmin {
         System.out.println("Nhập giá mới của sản phẩm: ");
         int price = scanner.nextInt();
         productManager.editPrice(id, price);
+        System.out.println();
         System.out.println("Sửa giá sản phẩm có id: " + id + " thành công!");
+        System.out.println();
     }
 
     private void editBrandByProduct(int id) throws InputMismatchException {
@@ -293,7 +341,9 @@ public class RunByAdmin {
         System.out.println("Nhập hãng mới của sản phẩm: ");
         String brand = scanner.nextLine();
         productManager.editBrand(id, brand);
+        System.out.println();
         System.out.println("Sửa hãng sản phẩm có id: " + id + " thành công!");
+        System.out.println();
     }
 
     private void editNameByProduct(int id) throws InputMismatchException {
@@ -301,16 +351,20 @@ public class RunByAdmin {
         System.out.println("Nhập tên mới của sản phẩm: ");
         String name = scanner.nextLine();
         productManager.editName(id, name);
+        System.out.println();
         System.out.println("Sửa tên sản phẩm có id: " + id + " thành công!");
+        System.out.println();
     }
 
     private void displayProductEdit(int idedit) {
-        for (Product product : (productManager.readFileData())){
-            if(product.getId() == idedit){
+        System.out.println();
+        for (Product product : (productManager.readFileData())) {
+            if (product.getId() == idedit) {
                 System.out.println("Sản phẩm đã sửa: ");
                 product.display();
             }
         }
+        System.out.println();
     }
     //hết sửa sản phẩm
 
@@ -348,7 +402,7 @@ public class RunByAdmin {
     }
 
     private ArrayList<AccountUser> getAccountUser() {
-        return ((new AccountUserManger())).getAccountUserList();
+        return ((new AccountUserManager())).getAccountUserList();
     }
 
     private ArrayList<User> getUser() {
@@ -359,26 +413,35 @@ public class RunByAdmin {
         ArrayList<AccountUser> accountUserList = getAccountUser();
         ArrayList<User> userList = getUser();
         if (accountUserList.size() == 0) {
+            System.out.println();
             System.out.println("Hiện không có người dùng nào");
+            System.out.println();
         } else {
             for (int i = 0; i < accountUserList.size(); i++) {
                 System.out.println(userList.get(i));
                 System.out.println(accountUserList.get(i));
             }
+            System.out.println();
         }
     }
 
     private void deleteUserByCheck() {
-        if ((new AccountUserManger()).getAccountUserList().size() == 0) {
+        if ((new AccountUserManager()).getAccountUserList().size() == 0) {
+            System.out.println();
             System.out.println("Hiện không có người dùng nào");
+            System.out.println();
         } else {
             scanner.nextLine();
             System.out.println("Nhập vào accountuser: ");
             String acc = scanner.nextLine();
             if (deleteUser(acc)) {
+                System.out.println();
                 System.out.println("Xóa người dùng thành công!");
+                System.out.println();
             } else {
+                System.out.println();
                 System.out.println("Không tồn tại người dùng có account là: " + acc);
+                System.out.println();
             }
         }
     }

@@ -1,4 +1,4 @@
-package _User;
+package _Account;
 
 import _ReadWriteFile.IOFile;
 
@@ -18,12 +18,17 @@ public class UserManager {
 
     public void setListUser(String name, long phonenumber, String address) {
         ArrayList<User> users;
-        if (getUserList() != null) {
-            users = getUserList();
-        } else {
+        if(checkFile()){
             users = userList;
+        }else {
+            users= getUserList();
         }
         users.add(new User(name, phonenumber, address));
         ioFile.writerFileData(users, PATHNAME_OF_USER);
+    }
+
+    public boolean checkFile() {
+        ArrayList<User> userList = getUserList();
+        return userList == null;
     }
 }

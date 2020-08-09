@@ -1,4 +1,4 @@
-package TestMain;
+package _Systems;
 
 import _Data._OIDataByTGDD.ListProducts;
 import _Login.Login;
@@ -7,6 +7,7 @@ import _Product.Product;
 import _Product.SmartPhone;
 import _Product.Tablet;
 import _ProductManager.ProductManager;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -26,8 +27,10 @@ public class RunByUser {
     public void menuProductOfUser() {
         try {
             do {
+                ArrayList<Product> arrayList = new ArrayList<>();
                 int choice = choiceOfUser();
                 if (choice < 0 || choice > 3) {
+                    System.out.println();
                     System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
                 }
                 switch (choice) {
@@ -38,43 +41,23 @@ public class RunByUser {
                         searchProductOfUser();
                         break;
                     case 3:
-                        int sumprice = 0;
-                        do {
-                            System.out.println("1. Mua sản phẩm");
-                            System.out.println("0. Thoát");
-                            System.out.println("Nhập vào lựa chọn của bạn: ");
-                            int choiceBuy = scanner.nextInt();
-                            switch (choiceBuy) {
-                                case 1:
-                                    getProductList();
-                                    System.out.println("Nhập vào id sản phẩm: ");
-                                    int id = scanner.nextInt();
-                                    int price = buyProductById(id);
-                                    sumprice += price;
-                                    break;
-                                case 0:
-                                    System.out.println("Tổng số tiền cần thanh toán là: " + sumprice);
-                                    System.out.println("Sản phẩm là: ");
-                                    //thiếu sản phẩm bán ra
-                                    menuProductOfUser();
-                                    break;
-                            }
-                        } while (true);
+                        menuBuyProduct(arrayList);
                     case 0:
                         exitOfUser();
                 }
             } while (true);
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             menuProductOfUser();
         }
     }
 
 
-
     //menu của hệ thống USER
-    private int choiceOfUser() throws InputMismatchException{
+    private int choiceOfUser() throws InputMismatchException {
         System.out.println("----------HỆ THỐNG USER---------");
         System.out.println("1. Hiển thị sản phẩm");
         System.out.println("2. Tìm kiếm sản phẩm");
@@ -86,7 +69,9 @@ public class RunByUser {
 
     private void displayProductOfUser() {
         if (productManager.checkFile()) {
+            System.out.println();
             System.out.println("Hiện không có sản phẩm");
+            System.out.println();
         } else {
             menuProduct();
         }
@@ -94,19 +79,22 @@ public class RunByUser {
 
     private void searchProductOfUser() {
         if (productManager.checkFile()) {
+            System.out.println();
             System.out.println("Hiện không có sản phẩm");
+            System.out.println();
         } else {
             menuSearchProduct();
         }
     }
 
     private void exitOfUser() {
-        (new Login()).loginSystem();
+        System.out.println();
         System.out.println("Đã thoát khỏi hệ thống USER");
+        System.out.println();
+        (new Login()).loginSystems();
         System.out.println();
     }
     //hết menu
-
 
 
     //chức năng hiển thị sản phẩm
@@ -121,32 +109,56 @@ public class RunByUser {
             int choice = inputChoiceToMenuDisplay();
             switch (choice) {
                 case 1:
-                    for (Laptop laptop : listProducts.getListLaptop()) {
-                        laptop.display();
+                    if (listProducts.checkFile()) {
+                        System.out.println();
+                        System.out.println("Hiện không có sản phẩm");
+                        System.out.println();
+                    } else {
+                        for (Laptop laptop : listProducts.getListLaptop()) {
+                            laptop.display();
+                        }
+                        System.out.println();
                     }
                     menuProductOfUser();
                     break;
                 case 2:
-                    for (SmartPhone smartPhone : listProducts.getListSmartphone()) {
-                        smartPhone.display();
+                    if (listProducts.checkFile()) {
+                        System.out.println();
+                        System.out.println("Hiện không có sản phẩm");
+                        System.out.println();
+                    } else {
+                        for (SmartPhone smartPhone : listProducts.getListSmartphone()) {
+                            smartPhone.display();
+                        }
+                        System.out.println();
                     }
                     menuProductOfUser();
                     break;
                 case 3:
-                    for (Tablet tablet : listProducts.getListTablet()) {
-                        tablet.display();
+                    if (listProducts.checkFile()) {
+                        System.out.println();
+                        System.out.println("Hiện không có sản phẩm");
+                        System.out.println();
+                    } else {
+                        for (Tablet tablet : listProducts.getListTablet()) {
+                            tablet.display();
+                        }
+                        System.out.println();
                     }
                     menuProductOfUser();
                     break;
                 case 4:
                     getProductList();
+                    System.out.println();
                     break;
                 case 0:
                     menuProductOfUser();
                     break;
             }
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             menuProduct();
         }
@@ -160,8 +172,7 @@ public class RunByUser {
         System.out.println("4. Product");
         System.out.println("0. Thoát");
         System.out.println("Mời bạn nhập lựa chọn: ");
-        int choice = scanner.nextInt();
-        return choice;
+        return scanner.nextInt();
     }
     //hết hiển thị sản phẩm
 
@@ -171,6 +182,11 @@ public class RunByUser {
         try {
             do {
                 int choiceSearch = inputToMenuSearchProduct();
+                if (choiceSearch < 0 || choiceSearch > 2) {
+                    System.out.println();
+                    System.out.println("Lựa chọn không tồn tại! Mời bạn nhập lại!");
+                    System.out.println();
+                }
                 switch (choiceSearch) {
                     case 1:
                         searchProductByKey();
@@ -184,7 +200,9 @@ public class RunByUser {
                 }
             } while (true);
         } catch (InputMismatchException e) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
             scanner.nextLine();
             menuSearchProduct();
         }
@@ -205,6 +223,7 @@ public class RunByUser {
         for (Product product : arrayList) {
             product.display();
         }
+        System.out.println();
     }
 
     private boolean checkKey(String key, String input) {
@@ -234,17 +253,21 @@ public class RunByUser {
         System.out.println("Nhập vào giá cao nhất: ");
         int hightprice = scanner.nextInt();
         if (hightprice < lowprice) {
+            System.out.println();
             System.out.println("Bạn đã nhập sai khoảng giá! Xin mời nhập lại!");
             searchProductByPrice();
         } else {
             ArrayList<Product> arrayList = productSearchByPrice(lowprice, hightprice);
             if (arrayList.isEmpty()) {
+                System.out.println();
                 System.out.println("Không có sản phẩm trong khoảng giá!");
+                System.out.println();
                 menuProductOfUser();
             } else {
                 for (Product product : arrayList) {
                     product.display();
                 }
+                System.out.println();
             }
         }
     }
@@ -260,23 +283,99 @@ public class RunByUser {
         }
         return listBySearch;
     }
-    //hết tìm kiế sản phẩm
+    //hết tìm kiếm sản phẩm
 
 
     //chức năng bán sản phẩm
-    private int buyProductById(int id) {
+    private void menuBuyProduct(ArrayList<Product> arrayList) {
+        try {
+            do {
+                int choiceBuy = inputChoiceToMenuBuy();
+                switch (choiceBuy) {
+                    case 1:
+                        setIdToDisplayBuyProduct(arrayList);
+                        break;
+                    case 0:
+                        displayBuyProduct(arrayList);
+                        break;
+                }
+            } while (true);
+        } catch (InputMismatchException e) {
+            System.out.println();
+            System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
+            scanner.nextLine();
+            menuSearchProduct();
+        }
+    }
+
+    private int inputChoiceToMenuBuy() throws InputMismatchException {
+        System.out.println("1. Mua sản phẩm");
+        System.out.println("0. Thoát");
+        System.out.println("Nhập vào lựa chọn của bạn: ");
+        return scanner.nextInt();
+    }
+
+    private void setIdToDisplayBuyProduct(ArrayList<Product> arrayList) {
+        try {
+            getProductList();
+            System.out.println();
+            System.out.println("Nhập vào id sản phẩm: ");
+            int id = scanner.nextInt();
+            Product product = buyProductById(id);
+            if (product == null) {
+                arrayList.add(new Product(0, "O", "O", 0));
+            } else {
+                arrayList.add(product);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println();
+            System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
+            System.out.println();
+            inputChoiceToMenuBuy();
+        }
+    }
+
+    private void displayBuyProduct(ArrayList<Product> arrayList) {
+        System.out.println("Các sản phẩm đã mua: ");
+        System.out.println();
+        int sumprice = 0;
+        for (Product product1 : arrayList) {
+            if (product1.getId() != 0) {
+                sumprice += product1.getPrice();
+                product1.display();
+            }
+        }
+        System.out.println();
+        System.out.println("Tổng số tiền cần thanh toán là: " + sumprice);
+        System.out.println();
+        menuProductOfUser();
+    }
+
+    private Product buyProductById(int id) {
         int price = 0;
+        Product productByBuy = null;
         for (Product product : productsList) {
             if (product.getId() == id) {
                 price = product.getPrice();
+                productByBuy = product;
             }
         }
         if (deleteNewProduct(id)) {
+            System.out.println();
             System.out.println("Mua hàng thành công, số tiền cần thanh toán là: " + price);
-        } else
+            System.out.println();
+            assert productByBuy != null;
+            productByBuy.display();
+            System.out.println();
+        } else {
+            System.out.println();
             System.out.println("Mua hàng thất bại, sản phẩm không tồn tại!");
-        return price;
+            System.out.println();
+        }
+        return productByBuy;
     }
+
 
     private boolean deleteNewProduct(int id) {
         boolean check = false;

@@ -2,10 +2,12 @@ package _Data._OIDataByTGDD;
 
 import _Data.CreateData.CreateListOfDataProduct;
 import _Product.Laptop;
+import _Product.Product;
 import _Product.SmartPhone;
 import _Product.Tablet;
 import _ReadWriteFile.IOFile;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ListProducts {
     private final IOFile<Laptop> ioLaptop;
@@ -49,5 +51,18 @@ public class ListProducts {
 
     public ArrayList<Tablet> getListTablet() {
         return ioTablet.readFileData(PATHNAME_OF_TABLET);
+    }
+
+    public boolean checkFile() {
+        if (getListLaptop() == null || getListTablet() == null || getListSmartphone() == null) {
+            return true;
+        }
+        ArrayList<Laptop> list = getListLaptop();
+        ArrayList<SmartPhone> list1 = getListSmartphone();
+        ArrayList<Tablet> list2 = getListTablet();
+        Iterator<Laptop> iterator = list.iterator();
+        Iterator<SmartPhone> iterator1 = list1.iterator();
+        Iterator<Tablet> iterator2 = list2.iterator();
+        return (!iterator.hasNext() || !iterator1.hasNext() || !iterator2.hasNext());
     }
 }
